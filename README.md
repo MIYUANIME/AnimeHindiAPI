@@ -83,6 +83,17 @@ The website animedekho.co uses Cloudflare security which may block requests from
    - Rotate user agents
    - Consider using a proxy service
 
+### Troubleshooting Deployment Issues
+
+If you encounter deployment issues, particularly with the greenlet package, try these solutions:
+
+1. The `runtime.txt` file specifies Python 3.11.9 which is more stable for this application
+2. The `requirements.txt` file explicitly specifies compatible versions of all dependencies
+3. If you still have issues, try:
+   - Clearing the build cache in Render (add `--no-cache-dir` to pip install command)
+   - Using a different Python version in `runtime.txt`
+   - Checking Render's documentation for Python deployment best practices
+
 ## Local Development
 
 To run the API locally:

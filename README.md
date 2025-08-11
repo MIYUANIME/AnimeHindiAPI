@@ -68,7 +68,7 @@ To deploy this API to Render, follow these steps:
    - Branch: `main` (or your default branch)
    - Root Directory: Leave empty if this is the root of your repository
    - Environment: `Python 3`
-   - Build Command: `pip install -r requirements.txt && playwright install-deps && playwright install firefox`
+   - Build Command: `pip install --no-cache-dir -r requirements.txt && playwright install-deps && playwright install firefox`
    - Start Command: `gunicorn --bind 0.0.0.0:$PORT app:app`
 6. Click "Create Web Service"
 
@@ -88,11 +88,13 @@ The website animedekho.co uses Cloudflare security which may block requests from
 If you encounter deployment issues, particularly with the greenlet package, try these solutions:
 
 1. The `runtime.txt` file specifies Python 3.11.9 which is more stable for this application
-2. The `requirements.txt` file explicitly specifies compatible versions of all dependencies
-3. If you still have issues, try:
-   - Clearing the build cache in Render (add `--no-cache-dir` to pip install command)
-   - Using a different Python version in `runtime.txt`
-   - Checking Render's documentation for Python deployment best practices
+2. The `requirements.txt` file uses Playwright 1.45.0 which has better compatibility
+3. The build command uses `--no-cache-dir` to avoid using cached packages that might be incompatible
+4. If you still have issues, try:
+   - Clearing the build cache in Render (trigger a new deploy with "Clear build cache" option)
+   - Checking that your repository has the latest changes
+   - Verifying that all files (requirements.txt, runtime.txt, render.yaml) are committed to your repository
+   - Checking Render's documentation for Python deployment best practices: https://render.com/docs/python
 
 ## Local Development
 
